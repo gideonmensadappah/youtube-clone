@@ -1,0 +1,7 @@
+li{
+    color:  black;
+    justify-content: space-around;
+    justify-items: center;
+    margin-left: 3em;
+   list-style:none;
+}

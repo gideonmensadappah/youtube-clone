@@ -1,0 +1,93 @@
+    
+[
+    {  
+    "id": 1,
+    "name": "gideon",
+    "description": "eat eat and sleep",
+    "videos": [{
+      "id": 1,
+      "title":  "Phaeleh - Should Be True",
+      "source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "uploader": "user",
+      "views": 50,
+      "uploadDate": "13:01:42 13:1:2",
+      "comments": [
+        {
+    "id": 1,
+    "text": "I love this song soo much",
+    "creationDate": "08:58 16:2:2020",
+    "poster": "user.name",
+    "replies": [],
+    "likeAmount": 5,
+    "dislikeAmount": 10
+        }
+      ],
+      "likeAmount": 3,
+      "dislikeAmount": 2}
+
+    ],
+    "subscriptions": []
+  },
+  {  
+    "id": 2,
+    "name": "nana",
+    "description": "sports",
+    "videos": [{
+      "id": 2,
+      "title":  "Meek mill - Should Be ",
+      "source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "uploader": "nana",
+      "views": 50,
+      "uploadDate": "13:01:42 13:1:2",
+      "comments": [
+        {
+    "id": 2,
+    "text": "Amazing song waww!!",
+    "creationDate": "08:58 16:2:2020",
+    "poster": "user.name",
+    "replies": [],
+    "likeAmount": 5,
+    "dislikeAmount": 10
+        }
+      ],
+      "likeAmount": 3,
+      "dislikeAmount": 2}
+
+    ],
+    "subscriptions": []
+  },
+  {  
+    "id": 3,
+    "name": "yossef",
+    "description": "fashion",
+    "videos": [{
+      "id": 2,
+      "title":  "Chris Brown - Should Be ",
+      "source": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "uploader": "yossef",
+      "views": 2500,
+      "uploadDate": "10:01:42 10:1:2",
+      "comments": [
+        {
+    "id": 2,
+    "text": "Amazed waww!!",
+    "creationDate": "08:58 16:2:2020",
+    "poster": "user.name",
+    "replies": [],
+    "likeAmount": 5,
+    "dislikeAmount": 10
+        }
+      ],
+      "likeAmount": 3,
+      "dislikeAmount": 2}
+
+    ],
+    "subscriptions": []
+  }
+  
+
+
+
+
+]
+   
