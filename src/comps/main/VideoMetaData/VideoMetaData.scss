@@ -1,8 +1,11 @@
 .video-metadata {
     color: #707070;
     font-size: 16px;
-    
-    
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-right: 50px;
+    margin-top: 5px;
 
     h3 {
         font-weight: 400;
@@ -13,7 +16,7 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
-        align-items: center;
+        align-items: flex-start;
         
     }
 }

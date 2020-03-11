@@ -84,7 +84,7 @@ export const addVid = addvideo => {
     })
 }
 
-// All videos 
+// All videos by id
 
 export const getAllVideos = userId => {
  
@@ -99,4 +99,9 @@ export const getAllVideos = userId => {
     })
 } 
 
-//TODO Get The user info by passing him to the profile page
+export const allVideos = all => {
+    return axios
+    .get('videos/all/videos')
+    .then(videos => videos)
+    .catch(err => console.log(err))
+}

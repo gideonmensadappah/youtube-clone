@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import videoBox from '../video/videobox.scss';
 
 
  export default function SideVideoMenue(props) {
-   
+
   
-    if (!props.id) {
+    if (!props.source) {
         return null;
     }
+
+
       const BASE_EMBED_URL = "https://www.youtube.com/embed/";
-      const embedUrl = `${BASE_EMBED_URL}${props.id}`;
+      const embedUrl = `${BASE_EMBED_URL}${props.source}`;
 
         return ( 
             <React.Fragment>
@@ -18,12 +21,12 @@ import videoBox from '../video/videobox.scss';
                height="200" 
                src={embedUrl}
                frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowFullScreen></iframe>
+               allowFullScreen
+               ></iframe>
        
                       </div>
               
-                   {/* <VideoPreview horizontal={true}/> */}
-                   {/* <VideoPreview/> */}
+                   
             </React.Fragment>
         
             );

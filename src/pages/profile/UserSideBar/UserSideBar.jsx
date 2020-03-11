@@ -13,7 +13,7 @@ export function UserSideBar(props) {
         
       
         <li className="nav-item">
-          <Link to={'/videos/all/videos'} className="nav-link">
+          <Link to={'/'} className="nav-link">
          
           <i className="fa fa-youtube-square " aria-hidden="true"></i> All Videos
       

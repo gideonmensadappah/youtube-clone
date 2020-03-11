@@ -1,33 +1,84 @@
-import React, { Component } from 'react';
-import {Video} from './video/video';
-import {RelatedVideos} from './videoList/videoList';
+import React, { useState, useEffect } from 'react';
 import Comments from './comments/comments';
-import Signin from '../../pages/signin/signin';
 import {VideoMetaData} from '../main/VideoMetaData/VideoMetaData';
+import {allVideos} from '../../data/UserFunctions';
+import {NextVideo} from '../main/nextVideo/nextVideo';
 
-class Main extends Component {
-    state = {  }
-    
-    render() { 
-        function getVideo(vid){
-            const _video = vid;
+const Main = () => {
+    const [activeVideo, setActiveVideo] = useState({})
+    const [videoList, setVideoList] = useState([])
+
+      //Get all videos and set the state
+      function getAllVideos(){
+      allVideos()
+      .then(videos => setVideoList(videos.data.videos))
+      .catch(err => console.log(err))
+      }
+
+        // Youtube Image Generator
+        const img = (videoSource,videoTile,videoId) => {
+       
+          return(
+              <img src={`https://img.youtube.com/vi/${videoSource}/hqdefault.jpg`} key={videoId} style={{width:'270px',border:'box',marginRight:'0', marginTop:'5em',cursor:'pointer'}} onClick={()=>handleClickedVideo(videoSource, videoTile, videoId)} />
+                  )
+          }
+          
+          //Handle Clicked Video Function
+       function handleClickedVideo(source, title, id){
+            setActiveVideo({
+              key:id,
+              source:source,
+              title:title
+            })
+          }
+
+      // Use Effect
+      useEffect(()=> {
+        getAllVideos()
+      },[])
+
+      // active video functon
+      function activeVid(){
             
-            return _video;
-        }
+        const embedUrl = `https://www.youtube.com/embed/${activeVideo.source}?autoplay=1`;
+          return ( 
+              <React.Fragment>
+                          <div className="box ml-auto">
+                 <iframe width="560" 
+                 key={activeVideo.key}
+                 height="315" 
+                 src={embedUrl}
+                 frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                 allowFullScreen
+                 ></iframe>
+                        </div>
+                        <VideoMetaData title={activeVideo.title} className='metadata mt-3 ml-0' viewCount={20000}/>
+              </React.Fragment>
+          
+        );
+    }
+
         return ( 
             <React.Fragment>
-            <div className='watch-grid'>
-            <Video className='video' id='6JnGBs88sL0'/>
-         {/* <VideoMetaData className='metadata ml-0' viewCount={20000}/>
-              <div className='video-info-box ml-0' style={{width: '80%', height: '100px', background: '#BD10E0'}}>Video Info box</div>
-            <div className='comments' style={{width: '80%', height: '100px', background: '#9013FE'}}>comments</div> */}
-          </div>
-            <RelatedVideos className='related-videos'/>
-          
+          {activeVid()}
+            <div className='col-md-8 ml-auto'>
+              <div className='video-info-box ml-auto' style={{width: '80%', height: '100px', marginRight:'15px', background:'black',color:'white'}}>Video Info box</div>
+            <div className='comments ml-auto' style={{width: '80%', height: '100px', marginRight:'15px', background: 'black',color:'white',marginTop:'5px'}}>comments</div>
+            </div>
+            <NextVideo/>
+     
+     
+              <div className="col-4 mt-0">
+            {
+              videoList.map(video => img(video.source, video.title, video.id) )
+            }
+              </div>
+   
+         
             </React.Fragment>
           
          );
     }
-}
+
  
 export default Main;

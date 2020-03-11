@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 
 
@@ -11,20 +11,18 @@ import Signin from './pages/signin/signin';
 import SignUp from './pages/signup/signup';
 import profile from './pages/profile/profile';
 import updateProfile from './pages/profile/editProfile';
-import {UserSideBar} from './pages/profile/UserSideBar/UserSideBar';
 import AddVideo from './comps/main/addVideo/addVideo';
-import myVideos from './comps/main/myVideo/myVideo';
+import {UserVideo } from './comps/main/myVideo/myVideo';
+
 
 
 function App() {
   return (
       <Router>
+          <React.Fragment>
         <Header/>
-        <Route path="/user/profile"component={profile}/>
+        <Route path="/user/profile" component={profile}/>
         <Route path="/user/update/:id" component={updateProfile}/>
-     
-      <React.Fragment>
-        <Switch>
     <div className="container">
       <div className="row">
       <div className="col">
@@ -33,13 +31,12 @@ function App() {
         <Route path="/users/signin"component={Signin}/>
         <Route path="/user/SignUp"component={SignUp}/>
         <Route path="/add/video" component={AddVideo}/>
-        <Route path="/videos/all/videos" component={Main} />
-        <Route path="/videos/myVideos/:id" component={myVideos}/>
+        <Route path="/videos/myVideos/:id" component={UserVideo}/>
     </div>
     </div>
     </div>
   
-        </Switch>
+        
      </React.Fragment>
       </Router>
   );

@@ -1,80 +1,121 @@
-import React ,{ Component, useEffect}  from 'react';
+import React, {useEffect, useState} from 'react';
 import {VideoMetaData } from '../VideoMetaData/VideoMetaData';
 import {getAllVideos} from '../../../data/UserFunctions';
-import MoveisMenue from '../MoveisMenue/moveisMenue'
 import {Video} from '../video/video';
-import axios from 'axios';
+  
 
 
 
-export default class myVideos extends Component{
-    constructor(){
-        super()
-        this.state = {};
+
+ export const  UserVideo = () => {
+   
+
+    //State
+    const [activeVideo, setActiveVideo] = useState({})
+    const [videoList, setVideoList] = useState([])
+
+
+
+    //Set video list function
+    function getVideos(){
+
         
+        //START WITH THIS FUNCTION
+        getAllVideos(3)
+        .then(res => {
+            
+            setVideoList(res.video)
+        })
+        .catch(err => console.log(err))
     }
 
-    componentDidMount(){
-    const userId = this.props.match.params.id;
-    console.log(userId)
-       getAllVideos(userId).then(res => {
-        console.log(res)
+
+        // Youtube Image Generator
+       const img = (image,title, id) => {
        
-      
-            this.setState([
-                res
-            ]) 
+        return(
+            <img src={`https://img.youtube.com/vi/${image}/hqdefault.jpg`} key={id} style={{width:'200px',border:'box', marginTop:'5em',cursor:'pointer'}} onClick={()=>handleClickedVideo(image, title, id)}/>
+                )
+       }
+   
            
+
         
-       }).catch(err => {
-           console.log(err)
-       })
+       //useEffect
+        useEffect(()=> {
+              getVideos()  
+        },[])
 
-    }   
-    
+        // Handle the image that has been clicked and set it to active video
+        function handleClickedVideo(vid,videoTitle, id){
+            console.log(`id to set active ${vid}`)
+            setActiveVideo({
+                    id:vid,
+                    key:id,
+                    title:videoTitle
+            })
+        }
+        // Active Video
+        function activeVid(){
+            
+            const embedUrl = `https://www.youtube.com/embed/${activeVideo.id}?autoplay=1`;
 
- 
-   
+      
+              return ( 
+                  <React.Fragment>
+                     <div className="box" >
+                     <iframe width="560" 
+                     key={activeVideo.key}
+                     height="315" 
+                     src={embedUrl}
+                     frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                     allowFullScreen
+                     ></iframe>
+                     </div>
+                     <VideoMetaData title={activeVideo.title} className='metadata mt-3 ml-0' viewCount={20000}/>
 
+                      
+                  </React.Fragment>
+              
+            );
+        }
 
- 
-    render(){
-   
+//renders the menu
+function renderVideoList(){
+                
+    return videoList.map(v =>
+            img(v.source, v.title, v.id)
+
+      )}
+
 
     return(
 
 
         <React.Fragment>
-        <div className="row">
-            <div className="col text-center">
-            my video page!! start... 
-            
-           
-            </div>
-        </div>
+
      <div className="row">
          <div className='watch-grid'>
-         <Video className='video' id='4aW1iw_fQ10'/>
-       <VideoMetaData className='metadata mt-3 ml-0' viewCount={20000}/>
+            {/*active video*/}
+         {activeVid()}
        </div>
    </div>
    <aside>
    <div className="row">
     <div className="col-4 text-center ml-auto">
-    {this.state ?
         <div>
-         {this.state[0].video.length }<MoveisMenue/>
-         </div> : null
-        }
-
+        {/* <MoveisMenue/> */}
+        {renderVideoList()}
+       
+         </div> 
     </div>
    </div>
    </aside>
 </React.Fragment>
    
         
+       
    
-    )
-}
+ )
   
-}
+    } 

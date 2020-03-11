@@ -6,9 +6,9 @@ export function VideoMetaData(props){
 const viewCount = Number(props.viewCount).toLocaleString() || '';
     return (
         <div className="video-metadata">
-        <h3>video title</h3>
+       {props.title ? <h3>Title: {props.title}</h3>:''}
         <div className="video-status">
-            <span>{viewCount} views</span>
+            {/* <span>{viewCount} views</span> */}
             <div>
                 {/*TODO*/}
             </div>

@@ -21,8 +21,7 @@ import {VideoPreview} from '../../main/videoPreview/videoPreview';
        
                       </div>
               
-                   {/* <VideoPreview horizontal={true}/> */}
-                   {/* <VideoPreview/> */}
+                  
             </React.Fragment>
         
             );
