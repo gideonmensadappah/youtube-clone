@@ -6,6 +6,7 @@
   "extends": [
     "plugin:prettier/recommended",
     "plugin:react/recommended",
+    "prettier/react",
     "airbnb"
   ],
   "globals": {
@@ -20,8 +21,12 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error"
+    "react/state-in-constructor": "off",
+    "arrow-parens": "off",
+    "react/destructuring-assignment": "off",
+    "react/prop-types": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }
