@@ -7,7 +7,7 @@ class AddVideo extends Component {
     super();
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.linkDestructor = this.linkDestructor.bind(this);
+    this.YouTubeGetID = this.YouTubeGetID.bind(this);
   }
 
   //onSubmit Function
@@ -19,7 +19,7 @@ class AddVideo extends Component {
     const decoded = jwt_decode(token);
     const txt = document.getElementById("video").value;
     const title = document.getElementById("title").value;
-    const vid = this.linkDestructor(txt);
+    const vid = this.YouTubeGetID(txt);
 
     // video title and link are in this Obj
     const video = {
@@ -31,22 +31,24 @@ class AddVideo extends Component {
     addVid(video);
   }
 
-  // Destruct the id from the link
-  linkDestructor(link) {
-    let text = "";
-    if (link == "") {
-      console.log("please you have to bring a link");
-    } else {
-      //seprate and get the ID of the link
-      //then return the id to console
-      // validate the arr
-      let arr = link.split("=");
-      const _arr = arr[1];
-      let endPos = arr[1].search("&");
-      text = _arr.slice(0, endPos);
+  /**
+   * Get YouTube ID from various YouTube URL
+   * @url: param
+   * return Parsed youtube ID
+   */
 
-      return text;
+  YouTubeGetID(url) {
+    let ID = "";
+    url = url
+      .replace(/(>|<)/gi, "")
+      .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    if (url[2] !== undefined) {
+      ID = url[2].split(/[^0-9a-z_\-]/i);
+      ID = ID[0];
+    } else {
+      ID = url;
     }
+    return ID;
   }
 
   //onChange function
