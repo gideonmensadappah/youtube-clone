@@ -58,7 +58,7 @@ class Header extends Component {
       </React.Fragment>
     );
     return (
-      <nav className="navbar  navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar fixed-top bg-dark navbar-expand-lg navbar-light bg-light">
         {localStorage.usertoken ? user : loginRegLink}
       </nav>
     );
