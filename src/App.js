@@ -11,25 +11,29 @@ import profile from "./pages/profile/profile";
 import updateProfile from "./pages/profile/editProfile";
 import AddVideo from "./comps/main/addVideo/addVideo";
 import { UserVideo } from "./comps/main/myVideo/myVideo";
-import { PageNotFound } from "./pages/pageNotFound/PageNotFound";
+import PageNotFound from "./pages/pageNotFound/PageNotFound";
 function App() {
+  const style = {
+    padding: "60px",
+    marginTop: "50px"
+  };
   return (
     <Router>
       <React.Fragment>
         <Header />
-        <Route path="/user/profile" component={profile} />
-        <Route path="/user/update/:id" component={updateProfile} />
-        <div className="container">
+        <div className="container" style={style}>
           <div className="row">
             <div className="col">
               <Switch>
+                <Route path="/user/profile" component={profile} />
+                <Route path="/user/update/:id" component={updateProfile} />
                 <Route path="/" exact component={Main} />
                 <Route path="/about" component={About} />
                 <Route path="/users/signin" component={Signin} />
                 <Route path="/user/SignUp" component={SignUp} />
                 <Route path="/add/video" component={AddVideo} />
                 <Route path="/videos/myVideos/:id" component={UserVideo} />
-                <Route component={PageNotFound} />
+                <Route path="*" component={PageNotFound} />
               </Switch>
             </div>
           </div>
