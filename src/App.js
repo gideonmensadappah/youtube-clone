@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Header from "./comps/header/header";
 import About from "./pages/about/about";
@@ -11,7 +11,7 @@ import profile from "./pages/profile/profile";
 import updateProfile from "./pages/profile/editProfile";
 import AddVideo from "./comps/main/addVideo/addVideo";
 import { UserVideo } from "./comps/main/myVideo/myVideo";
-
+import { PageNotFound } from "./pages/pageNotFound/PageNotFound";
 function App() {
   return (
     <Router>
@@ -22,12 +22,15 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col">
-              <Route path="/" exact component={Main} />
-              <Route path="/about" component={About} />
-              <Route path="/users/signin" component={Signin} />
-              <Route path="/user/SignUp" component={SignUp} />
-              <Route path="/add/video" component={AddVideo} />
-              <Route path="/videos/myVideos/:id" component={UserVideo} />
+              <Switch>
+                <Route path="/" exact component={Main} />
+                <Route path="/about" component={About} />
+                <Route path="/users/signin" component={Signin} />
+                <Route path="/user/SignUp" component={SignUp} />
+                <Route path="/add/video" component={AddVideo} />
+                <Route path="/videos/myVideos/:id" component={UserVideo} />
+                <Route component={PageNotFound} />
+              </Switch>
             </div>
           </div>
         </div>
