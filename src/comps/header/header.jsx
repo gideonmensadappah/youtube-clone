@@ -40,9 +40,13 @@ class Header extends Component {
           </ul>
           <ul className="navbar-nav ">
             <Link to="/user/profile">
-              <li className="nav-item">My Profile</li>
+              <li className="nav-item">
+                {/* <i class="fa fa-user fa-5x" aria-hidden="true"></i> */}
+                My Profile
+              </li>
             </Link>
-
+          </ul>
+          <ul className="navbar-nav ">
             <li className="nav-item">
               <a href="" onClick={this.logOut.bind(this)} className="nav-link">
                 {" "}
