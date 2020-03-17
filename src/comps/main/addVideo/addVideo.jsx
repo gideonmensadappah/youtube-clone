@@ -12,6 +12,7 @@ class AddVideo extends Component {
 
   //onSubmit Function
   onSubmit(e) {
+    console.log(this.props);
     e.preventDefault();
     console.log("start process");
     const token = localStorage.getItem("usertoken");
@@ -22,13 +23,26 @@ class AddVideo extends Component {
     const vid = this.YouTubeGetID(txt);
 
     // video title and link are in this Obj
-    const video = {
-      title: title,
-      video: vid,
-      uploader_id: decoded.id
-    };
-    console.log(video);
-    addVid(video);
+
+    if (!title) {
+      alert("song name is required");
+    }
+    if (title.length < 3) {
+      alert("check the title of the song... must pass the 3 chars");
+    }
+    if (!txt) {
+      alert("you have to add a song link from youtube");
+    } else if (txt && title) {
+      const video = {
+        title: title,
+        video: vid,
+        uploader_id: decoded.id
+      };
+      console.log(video);
+      addVid(video);
+      alert("added new song...");
+      this.props.history.push(`/videos/myVideos/${video.uploader_id}`);
+    }
   }
 
   /**
