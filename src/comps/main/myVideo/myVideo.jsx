@@ -79,7 +79,18 @@ export const UserVideo = props => {
 
   //renders the menu
   function renderVideoList() {
-    return videoList.map(v => img(v.source, v.title, v.id));
+    if (videoList.length === 0) {
+      return (
+        <div>
+          <span>
+            You have No videos for now...
+            <br /> please go add videos{" "}
+          </span>
+        </div>
+      );
+    } else {
+      return videoList.map(v => img(v.source, v.title, v.id));
+    }
   }
 
   return (
