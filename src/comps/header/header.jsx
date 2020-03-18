@@ -38,6 +38,18 @@ class Header extends Component {
               <li className="nav-item ">YourChannel</li>
             </Link>
           </ul>
+          <form class="form-inline">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
           <ul className="navbar-nav ">
             <Link to="/user/profile">
               <li className="nav-item">
@@ -46,6 +58,7 @@ class Header extends Component {
               </li>
             </Link>
           </ul>
+
           <ul className="navbar-nav ">
             <li className="nav-item">
               <a href="" onClick={this.logOut.bind(this)} className="nav-link">
