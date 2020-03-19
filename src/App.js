@@ -21,23 +21,23 @@ function App() {
     <Router>
       <React.Fragment>
         <Header />
-        <div className="container" style={style}>
+        {/* <div className="container" style={style}>
           <div className="row">
-            <div className="col">
-              <Switch>
-                <Route path="/user/profile" component={profile} />
-                <Route path="/user/update/:id" component={updateProfile} />
-                <Route path="/" exact component={Main} />
-                <Route path="/about" component={About} />
-                <Route path="/users/signin" component={Signin} />
-                <Route path="/user/SignUp" component={SignUp} />
-                <Route path="/add/video" component={AddVideo} />
-                <Route path="/videos/myVideos/:id" component={UserVideo} />
-                <Route path="*" component={PageNotFound} />
-              </Switch>
-            </div>
+            <div className="col"> */}
+        <Switch>
+          <Route path="/user/profile" component={profile} />
+          <Route path="/user/update/:id" component={updateProfile} />
+          <Route path="/" exact component={Main} />
+          <Route path="/about" component={About} />
+          <Route path="/users/signin" component={Signin} />
+          <Route path="/user/SignUp" component={SignUp} />
+          <Route path="/add/video" component={AddVideo} />
+          <Route path="/videos/myVideos/:id" component={UserVideo} />
+          <Route path="*" component={PageNotFound} />
+        </Switch>
+        {/* </div>
           </div>
-        </div>
+        </div> */}
       </React.Fragment>
     </Router>
   );
