@@ -103,3 +103,17 @@ export const allVideos = all => {
     .then(videos => videos)
     .catch(err => console.log(err));
 };
+
+export const addCommentFunc = comment => {
+  return axios
+    .post("/comments/addComment", comment)
+    .then(res => res)
+    .catch(err => err);
+};
+
+export const allComments = () => {
+  return axios
+    .get(`/comments/getComments`)
+    .then(res => res)
+    .catch(err => err);
+};
