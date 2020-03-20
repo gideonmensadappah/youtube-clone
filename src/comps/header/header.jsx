@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import head from "../header/head.css";
 import { Link, withRouter } from "react-router-dom";
 import { UserSideBar } from "../../pages/profile/UserSideBar/UserSideBar";
-
+import SearchBar from "../header/searchBar";
 class Header extends Component {
   logOut(e) {
     e.preventDefault();
@@ -11,6 +11,7 @@ class Header extends Component {
   }
 
   state = {};
+
   render() {
     const loginRegLink = (
       <React.Fragment>
@@ -38,18 +39,7 @@ class Header extends Component {
               <li className="nav-item ">YourChannel</li>
             </Link>
           </ul>
-          <form class="form-inline">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
+          <SearchBar />
           <ul className="navbar-nav ">
             <Link to="/user/profile">
               <li className="nav-item">
