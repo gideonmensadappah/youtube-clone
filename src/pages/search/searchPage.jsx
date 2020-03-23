@@ -26,7 +26,7 @@ export default class SearchPage extends Component {
     getDataforUserSearch(url)
       .then(result => {
         this.setState({
-          result: result.data,
+          resulfafasfffat: result.data,
           res: result.data
         });
       })
