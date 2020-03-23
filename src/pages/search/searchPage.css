@@ -1,0 +1,8 @@
+.display-serch {
+  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column !important;
+  /* position: relative; */
+}
