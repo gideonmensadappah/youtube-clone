@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import head from "../header/head.css";
 import { Link, withRouter } from "react-router-dom";
 import { UserSideBar } from "../../pages/profile/UserSideBar/UserSideBar";
-import SearchBar from "../header/searchBar";
 class Header extends Component {
   logOut(e) {
     e.preventDefault();
@@ -39,7 +38,7 @@ class Header extends Component {
               <li className="nav-item ">YourChannel</li>
             </Link>
           </ul>
-          <SearchBar />
+
           <ul className="navbar-nav ">
             <Link to="/user/profile">
               <li className="nav-item">

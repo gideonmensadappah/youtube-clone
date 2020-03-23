@@ -1,34 +1,68 @@
 import React, { Component } from "react";
-import { allVideos } from "../../data/UserFunctions";
+import { Link, Redirect } from "react-router-dom";
+import head from "../header/head.css";
+import axios from "axios";
+const queryString = require("query-string");
+
 export default class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: "",
+      result: {},
+      loading: false,
+      message: ""
+    };
+    this.cancel = "";
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeInputEvent = this.handleChangeInputEvent.bind(this);
+  }
+
+  handleChangeInputEvent = e => {
+    const searchQuery = e.target.value;
+    this.setState({ searchQuery, loading: true, message: "" });
+  };
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("start");
+
+    let query = this.state.searchQuery;
+    const readyURL = query.replace(/ /g, "-");
+    this.props.history.push(`/search?query=${readyURL}`);
+  }
+
   render() {
-    function handleChange() {
-      allVideos().then(e => {
-        const songs = e.data.videos;
-
-        const search = document.getElementById("search").value;
-        // get the list and filter trough it [list of videos]
-        const res = songs.filter(el => {
-          // string is the user input (param) user input
-          return el.title.indexOf(search) !== -1;
-        });
-
-        console.log(res);
-      });
-    }
     return (
-      <form className="form-inline" onClick={this.handleSubmit}>
-        <input
-          className="form-control mr-sm-2"
-          id="search"
-          type="search"
-          placeholder="Search video"
-          aria-label="Search"
-          onChange={handleChange}
-        />
-
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
+      <form
+        className="con"
+        onSubmit={this.handleSubmit}
+        noValidate
+        autoComplete="off"
+      >
+        <label htmlFor="search">
+          <input
+            className="form-control"
+            id="search"
+            type="text"
+            value={this.state.search}
+            onChange={this.handleChangeInputEvent}
+            placeholder="Search..."
+            aria-label="Search"
+            style={{ width: "350px" }}
+          />
+        </label>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
         </button>
       </form>
     );
