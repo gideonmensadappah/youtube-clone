@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import head from "../header/head.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link, withRouter } from "react-router-dom";
 import { UserSideBar } from "../../pages/profile/UserSideBar/UserSideBar";
+import SearchBar from "../header/searchBar";
 class Header extends Component {
   logOut(e) {
     e.preventDefault();
@@ -22,6 +24,7 @@ class Header extends Component {
             <li className="nav-item">About</li>
           </Link>
         </ul>
+
         <ul className="navbar-nav ml-auto">
           <Link to="/users/signin">
             <li className="nav-item active">Login</li>
@@ -49,6 +52,10 @@ class Header extends Component {
           </ul>
 
           <ul className="navbar-nav ">
+            {/* 
+          TypeError: Cannot read property 'push' of undefined
+          */}
+            <SearchBar />
             <li className="nav-item">
               <a href="" onClick={this.logOut.bind(this)} className="nav-link">
                 {" "}
