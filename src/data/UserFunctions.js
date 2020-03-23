@@ -96,24 +96,31 @@ export const getAllVideos = userId => {
       return error;
     });
 };
-
+// Get all videos
 export const allVideos = all => {
   return axios
     .get("videos/all/videos")
     .then(videos => videos)
     .catch(err => console.log(err));
 };
-
+// Add new comment
 export const addCommentFunc = comment => {
   return axios
     .post("/comments/addComment", comment)
     .then(res => res)
     .catch(err => err);
 };
-
+//Fetch  all comments
 export const allComments = () => {
   return axios
     .get(`/comments/getComments`)
     .then(res => res)
     .catch(err => err);
+};
+
+export const getDataforUserSearch = param => {
+  return axios
+    .get(`/videos/${param}`)
+    .then(result => result)
+    .catch(error => error);
 };
