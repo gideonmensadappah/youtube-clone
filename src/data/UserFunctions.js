@@ -119,6 +119,7 @@ export const allComments = () => {
 };
 
 export const getDataforUserSearch = param => {
+  console.log(param);
   return axios
     .get(`/videos/${param}`)
     .then(result => result)
