@@ -1,7 +1,12 @@
-li{
-    color:  black;
-    justify-content: space-around;
-    justify-items: center;
-    margin-left: 3em;
-   list-style:none;
+li {
+  color: black;
+  justify-content: space-around;
+  justify-items: center;
+  margin-left: 3em;
+  list-style: none;
+}
+.con {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
 }
