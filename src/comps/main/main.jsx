@@ -28,7 +28,7 @@ const Main = () => {
       <img
         src={`https://img.youtube.com/vi/${videoSource}/hqdefault.jpg`}
         key={videoId}
-        style={{ width: 200, marginTop: "10px" }}
+        style={{ width: 200, marginTop: "10px", cursor: "pointer" }}
         onClick={() => handleClickedVideo(videoSource, videoTile, videoId)}
       />
     );
