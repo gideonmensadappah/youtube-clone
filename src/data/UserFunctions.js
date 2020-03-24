@@ -119,8 +119,9 @@ export const allComments = () => {
 };
 
 export const getDataforUserSearch = param => {
+  console.log(param);
   return axios
-    .get(`/videos/${param}`)
+    .get(`/videos/search/query=${param}`)
     .then(result => result)
     .catch(error => error);
 };
