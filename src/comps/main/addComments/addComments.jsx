@@ -61,31 +61,31 @@ export const AddComments = props => {
 
   return (
     <>
-      <div className="col box">
-        <form className="form-inline" onSubmit={handleSubmit}>
-          <div className="form-group mb-2">
-            <div className="form-group  mb-2">
-              <label htmlFor="comment" className="sr-only">
-                comment
-              </label>
-              <input
-                onChange={handleChange}
-                type="text"
-                className="form-control"
-                id="inputComment"
-                placeholder="comment..."
-              />
-            </div>
-            <button
-              type="submit"
-              style={{ marginLeft: "4px" }}
-              className="btn btn-primary  mb-2"
-            >
-              add
-            </button>
+      {/* <div className="col box"> */}
+      <form className="form-inline mr-auto" onSubmit={handleSubmit}>
+        <div className="form-group  mb-2">
+          <div className="form-group  mb-2">
+            <label htmlFor="comment" className="sr-only">
+              comment
+            </label>
+            <input
+              onChange={handleChange}
+              type="text"
+              className="form-control"
+              id="inputComment"
+              placeholder="comment..."
+            />
           </div>
-        </form>
-      </div>
+          <button
+            type="submit"
+            style={{ marginLeft: "4px" }}
+            className="btn btn-primary  mb-2"
+          >
+            add
+          </button>
+        </div>
+      </form>
+      {/* </div> */}
       {renderCommentsList()}
     </>
   );
