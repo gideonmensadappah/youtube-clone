@@ -101,10 +101,6 @@ const Main = () => {
           {videoList.map(video => img(video.source, video.title, video.id))}
         </div>
       </div>
-
-      <div className="comment col-6">
-        <Comments activeVideoId={activeVideo.id} />
-      </div>
     </React.Fragment>
   );
 };
