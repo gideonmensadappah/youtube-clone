@@ -1,22 +1,30 @@
 .video-metadata {
-    color: #707070;
-    font-size: 16px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-right: 50px;
+  color: #707070;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 50px;
+  margin-top: 5px;
+  flex-direction: column;
+
+  h3 {
+    font-weight: 400;
+    color: black;
+    margin-right: auto;
     margin-top: 5px;
+  }
+  span {
+    font-weight: 400;
+    color: black;
+    margin-right: auto;
+  }
 
-    h3 {
-        font-weight: 400;
-        color: black
-    }
-
-    .video-stats {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        align-items: flex-start;
-        
-    }
+  .video-stats {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+    color: black;
+  }
 }

@@ -14,7 +14,6 @@ export default class SearchPage extends Component {
   }
   componentDidMount() {
     //query string
-
     const url = this.props.location.search;
     console.log(url);
     const userRequest = url.split("=");
@@ -25,6 +24,7 @@ export default class SearchPage extends Component {
 
     getDataforUserSearch(url)
       .then(result => {
+        console.log(result);
         this.setState({
           resulfafasfffat: result.data,
           res: result.data

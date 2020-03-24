@@ -6,6 +6,7 @@ import SearchBar from "../header/searchBar";
 import { AddComments } from "./addComments/addComments";
 import { allVideos } from "../../data/UserFunctions";
 import main from "../main/main.css";
+
 const Main = () => {
   const [activeVideo, setActiveVideo] = useState({
     id: 0,

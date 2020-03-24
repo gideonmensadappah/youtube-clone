@@ -54,6 +54,8 @@ class Header extends Component {
           <ul className="navbar-nav ">
             {/* 
           TypeError: Cannot read property 'push' of undefined
+              withRouter
+         
           */}
             <SearchBar />
             <li className="nav-item">

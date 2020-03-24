@@ -22,7 +22,6 @@ function App() {
   return (
     <Router>
       <React.Fragment>
-        <Route path="/" component={SearchBar} />
         <Header />
         <Switch>
           {/* <div className="container" style={style}>
