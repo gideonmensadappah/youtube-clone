@@ -26,8 +26,7 @@ export const AddComments = props => {
       addCommentFunc(comment)
         .then(res => {
           alert("added new comment...");
-          // const added = res.data.data.comment;
-          // setCommentList.push(added);
+          getComments();
         })
         .catch(err => console.log(err));
     }
@@ -45,12 +44,13 @@ export const AddComments = props => {
   }, []);
 
   const renderCommentsList = () => {
+    console.log(commentList);
     const filteredVideo = commentList.filter(
       comments => comments.video_id === activeId
     );
     if (filteredVideo.length != 0) {
       return filteredVideo.map(comment => (
-        <div className="card" key={comment.id}>
+        <div className="card mt-3" key={comment.id}>
           <div className="card-body">{comment.comment}</div>
         </div>
       ));
