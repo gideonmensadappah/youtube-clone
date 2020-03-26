@@ -13,7 +13,7 @@ import AddVideo from "./comps/main/addVideo/addVideo";
 import { UserVideo } from "./comps/main/myVideo/myVideo";
 import PageNotFound from "./pages/pageNotFound/PageNotFound";
 import SearchBar from "./comps/header/searchBar.jsx";
-import SearchPage from "./pages/search/searchPage";
+import { SearchPage } from "./pages/search/searchPage";
 function App() {
   const style = {
     padding: "60px",
@@ -36,7 +36,7 @@ function App() {
           <Route path="/user/SignUp" component={SignUp} />
           <Route path="/add/video" component={AddVideo} />
           <Route path="/videos/myVideos/:id" component={UserVideo} />
-          <Route pah="/search/:query?q=val/:" component={SearchPage} />
+          <Route pah="/search/results" component={SearchPage} />
           <Route path="*" component={PageNotFound} />
         </Switch>
         {/* </div>
