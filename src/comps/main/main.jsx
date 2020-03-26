@@ -71,7 +71,7 @@ const Main = () => {
   return (
     <React.Fragment>
       {/* video and videoList grid */}
-      <div className="container">
+      <div className="container" id="gridCon">
         {/* Active video  */}
         <div className="item-1">
           {activeVid()}
