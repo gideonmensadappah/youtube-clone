@@ -1,37 +1,38 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import head from "../header/head.css";
 import axios from "axios";
 const queryString = require("query-string");
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: "",
-      result: {},
-      loading: false,
-      message: ""
+      userSearch: ""
     };
-    this.cancel = "";
-
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeInputEvent = this.handleChangeInputEvent.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-
-  handleChangeInputEvent = e => {
-    const searchQuery = e.target.value;
-    this.setState({ searchQuery, loading: true, message: "" });
+  handleChange = event => {
+    // console.log(event.target.value);
+    this.setState({
+      userSearch: event.target.value
+    });
   };
-
-  handleSubmit(e) {
-    e.preventDefault();
-    console.log("start");
-
-    let query = this.state.searchQuery;
-    const readyURL = query.replace(/ /g, "-");
-    this.props.history.push(`/search?query=${readyURL}`);
-  }
+  handleSubmit = event => {
+    event.preventDefault();
+    let dataToSend = this.state.userSearch.trim();
+    if (dataToSend != "") {
+      console.log("send user request!!");
+      // console.log(this.state.userSearch);
+      this.props.history.push({
+        pathname: "/search/results",
+        data: dataToSend
+      });
+    } else if (dataToSend === "") {
+      alert("please you must write somthing");
+    }
+  };
 
   render() {
     return (
@@ -45,9 +46,9 @@ export default class SearchBar extends Component {
           <input
             className="form-control"
             id="search"
+            value={this.state.value}
+            onChange={this.handleChange}
             type="text"
-            value={this.state.search}
-            onChange={this.handleChangeInputEvent}
             placeholder="Search..."
             aria-label="Search"
             style={{ width: "350px" }}
@@ -68,3 +69,4 @@ export default class SearchBar extends Component {
     );
   }
 }
+export default withRouter(SearchBar);

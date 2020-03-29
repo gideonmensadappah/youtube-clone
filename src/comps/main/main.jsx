@@ -28,7 +28,7 @@ const Main = () => {
       <img
         src={`https://img.youtube.com/vi/${videoSource}/hqdefault.jpg`}
         key={videoId}
-        style={{ width: 200, marginTop: "10px" }}
+        style={{ width: 200, marginTop: "10px", cursor: "pointer" }}
         onClick={() => handleClickedVideo(videoSource, videoTile, videoId)}
       />
     );
@@ -53,57 +53,59 @@ const Main = () => {
   function activeVid() {
     const embedUrl = `https://www.youtube.com/embed/${activeVideo.source}?autoplay=1`;
     return (
-      <div className="box-border ">
-        <iframe
-          className="video"
-          width="700"
-          key={activeVideo.key}
-          height="415"
-          src={embedUrl}
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>{" "}
-      </div>
+      // <div className="box-border ">
+      <iframe
+        className="video"
+        width="700"
+        key={activeVideo.key}
+        height="415"
+        src={embedUrl}
+        frameBorder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      // </div>
     );
   }
 
   return (
     <React.Fragment>
-      <div className="activeVideo">{activeVid()}</div>
-
-      <div
-        className="div1"
-        style={{
-          width: "700px",
-          height: "100px",
-          marginLeft: "60px",
-          // background: "black",
-          color: "black"
-        }}
-      >
-        <VideoMetaData
-          title={activeVideo.title}
-          className="metadata mt-3 ml-0"
-          viewCount={20000}
-        />{" "}
-      </div>
-
-      <div className="container">
-        <div className="boxs" id="comment">
-          {" "}
-          Add comment below
-          <AddComments id={activeVideo.id} />
+      {/* video and videoList grid */}
+      <div className="container" id="gridCon">
+        {/* Active video  */}
+        <div className="item-1">
+          {activeVid()}
+          <div
+            className="item-3"
+            style={{
+              // width: "700px",
+              // height: "100px",
+              marginLeft: "60px",
+              color: "black"
+            }}
+          >
+            <VideoMetaData
+              title={activeVideo.title}
+              className="metadata mt-3 ml-0"
+              viewCount={20000}
+            />{" "}
+          </div>
+          <div className="item-4">
+            {/* Comment list */}
+            {/* <div className="boxs" id="comment"> */} Add comment below
+            <AddComments id={activeVideo.id} />
+            {/* </div> */}
+          </div>
         </div>
 
-        {/* <NextVideo /> */}
-        <div className="boxs">
+        {/* video list */}
+
+        <div className="item-2 list">
           {videoList.map(video => img(video.source, video.title, video.id))}
         </div>
-      </div>
+        {/* Video metadata  */}
 
-      <div className="comment col-6">
-        <Comments activeVideoId={activeVideo.id} />
+        {/* comment grid */}
       </div>
     </React.Fragment>
   );

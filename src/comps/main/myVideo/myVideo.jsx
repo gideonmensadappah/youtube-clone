@@ -57,7 +57,7 @@ export const UserVideo = props => {
 
     return (
       <React.Fragment>
-        <div className="box">
+        <div className="box" style={{ marginTop: "5em", marginLeft: "2em" }}>
           <iframe
             width="560"
             key={activeVideo.key}
@@ -101,16 +101,14 @@ export const UserVideo = props => {
           {activeVid()}
         </div>
       </div>
-      <aside>
-        <div className="row">
-          <div className="col-4 text-center ml-auto">
-            <div>
-              {/* <MoveisMenue/> */}
-              {renderVideoList()}
-            </div>
+      <div className="row">
+        <div className="col-4 text-center ml-auto">
+          <div>
+            {/* <MoveisMenue/> */}
+            {renderVideoList()}
           </div>
         </div>
-      </aside>
+      </div>
     </React.Fragment>
   );
 };

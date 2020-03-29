@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { addCommentFunc } from "../../../data/UserFunctions";
+import React, { useState, useEffect } from "react";
+import { addCommentFunc, allComments } from "../../../data/UserFunctions";
 export const AddComments = props => {
+  const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState({});
-  // console.log(props.id);
+  const activeId = props.id;
 
+  //handle change
   function handleChange(e) {
     e.preventDefault();
     const inputComment = document.getElementById("inputComment").value;
@@ -14,22 +16,54 @@ export const AddComments = props => {
     });
   }
 
+  // handle submitted form
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(comment.hasOwnProperty("comment"));
+
     if (false) {
       console.log("cant send, the comment is not valid");
     } else {
       addCommentFunc(comment)
-        .then(res => alert("added new comment..."))
+        .then(res => {
+          alert("added new comment...");
+          getComments();
+        })
         .catch(err => console.log(err));
     }
   }
 
+  function getComments() {
+    console.log("in");
+    allComments()
+      .then(res => setCommentList(res.data))
+      .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
+  const renderCommentsList = () => {
+    console.log(commentList);
+    const filteredVideo = commentList.filter(
+      comments => comments.video_id === activeId
+    );
+    if (filteredVideo.length != 0) {
+      return filteredVideo.map(comment => (
+        <div className="card mt-3" key={comment.id}>
+          <div className="card-body">{comment.comment}</div>
+        </div>
+      ));
+    } else {
+      return <span>No comment for this video..</span>;
+    }
+  };
+
   return (
-    <div className="col box">
-      <form className="form-inline" onSubmit={handleSubmit}>
-        <div className="form-group mb-2">
+    <>
+      {/* <div className="col box"> */}
+      <form className="form-inline mr-auto" onSubmit={handleSubmit}>
+        <div className="form-group  mb-2">
           <div className="form-group  mb-2">
             <label htmlFor="comment" className="sr-only">
               comment
@@ -51,6 +85,8 @@ export const AddComments = props => {
           </button>
         </div>
       </form>
-    </div>
+      {/* </div> */}
+      {renderCommentsList()}
+    </>
   );
 };

@@ -6,3 +6,27 @@
   flex-direction: column !important;
   /* position: relative; */
 }
+
+#resultsNotFound {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  flex-direction: column;
+}
+
+.containerNotFound {
+  display: flex;
+  justify-content: center;
+}
+
+#con {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 1rem;
+  margin-bottom: 0em !important;
+  margin-top: 10em;
+}
+
+.rw {
+  margin-top: 0em;
+}
