@@ -14,6 +14,7 @@ export const signup = newUser => {
     });
 };
 
+//Signin
 export const signin = user => {
   return axios
     .post("/users/signin", {
@@ -21,12 +22,13 @@ export const signin = user => {
       password: user.password
     })
     .then(res => {
-      localStorage.setItem("usertoken", res.data.token);
+      if (res.data.error) {
+        return { error: res.data.error };
+      } else {
+        localStorage.setItem("usertoken", res.data.token);
+        return res.data.token;
+      }
 
-      console.log(res.data);
-      console.log("Logged in");
-
-      return res.data.token;
       // return res;
     })
     .catch(err => {
