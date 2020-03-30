@@ -1,104 +1,29 @@
-.videosList {
+.item1 {
+  grid-area: video;
+}
+.item2 {
+  grid-area: videoList;
+}
+.item-3 {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  margin-top: 0;
-  margin-left: 50px;
-  flex-direction: column;
-  width: 720px;
-  cursor: pointer;
 }
-
-.comment {
-  margin-left: 120px;
-}
-.div1 {
-  margin-top: 5px;
-}
-.activeVideo {
-  display: flex;
-  justify-content: center;
-  width: 800px;
+.item4 {
+  grid-area: comment;
 }
 
 .container {
-  height: auto;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  /* flex-flow: wrap; */
-}
-@media screen and(max-width: 1200px) {
-  .box {
-    width: 40px;
-  }
-}
-#comment {
-  /* margin-left: 15px; */
-}
-.boxs {
-  width: 20%;
-  height: 300px;
-  margin-right: 50px;
-  padding-left: 20px;
-
-  box-sizing: border-box;
+  display: grid;
+  grid-template-areas:
+    "video videoList"
+    "comment comment";
+  grid-gap: 20px;
+  background-color: #2196f3;
+  padding: 10px;
+  margin-top: 3em;
 }
 
-.video {
+.list {
   display: flex;
-  margin-top: 100px;
-  margin-left: 15px;
-}
-/* .commentBox {
-  width: 20px;
-  display: flex;
+  margin-top: 10px;
   flex-direction: column;
-  margin-right: auto;
-} */
-
-/* second test 
-.div2 {
-  display: inline-block;
-  margin-top: 2px;
-  width: 100px;
-  height: 100px;
 }
-.div3 {
-  height: 100px;
-  width: 100px;
-  margin-right: auto;
-  display: inline-block;
-
-  marginright: 0;
-  margin-top: 5em;
-  cursor: pointer;
-}
-.imageList {
-}
- */
-
-/* first test
-.div1 {
-  display: inline-block;
-  width: 100%;
-  margin-top: auto;
-}
-
-.videosList {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  margin-top: 0;
-  margin-left: 50px;
-  flex-direction: column;
-  width: 720px;
-}
-
-/* .video-box {
-  display: inline-block;
-  width: 100%;
-  min-height: 50px;
-  background-color: #eee;
-  height: auto;
-} */

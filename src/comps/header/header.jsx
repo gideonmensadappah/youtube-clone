@@ -50,12 +50,12 @@ class Header extends Component {
               </li>
             </Link>
           </ul>
-
+          <SearchBar />
           <ul className="navbar-nav ">
             {/* 
           TypeError: Cannot read property 'push' of undefined
           */}
-            <SearchBar />
+
             <li className="nav-item">
               <a href="" onClick={this.logOut.bind(this)} className="nav-link">
                 {" "}
