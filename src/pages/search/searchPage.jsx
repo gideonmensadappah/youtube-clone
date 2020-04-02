@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import queryString from "query-string";
-import { getDataforUserSearch } from "../../data/UserFunctions";
+import { getDataForUserSearch } from "../../data/UserFunctions";
 import searchPage from "./searchPage.css";
 export default class SearchPage extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class SearchPage extends Component {
       query: userRequest[1]
     });
 
-    getDataforUserSearch(userRequest[1])
+    getDataForUserSearch(userRequest[1])
       .then(result => {
         console.log(result);
         this.setState({
