@@ -111,17 +111,13 @@ export const addCommentFunc = comment => {
     .catch(err => err);
 };
 //Fetch  all comments
-export const allComments = () => {
-  return axios
-    .get(`/comments/getComments`)
-    .then(res => res)
-    .catch(err => err);
+export const allComments = async () => {
+  return await axios.get(`/comments/getComments`);
 };
 
-export const getDataforUserSearch = param => {
-  console.log(param);
+export const getDataForUserSearch = query => {
   return axios
-    .get(`/videos/search/query=${param}`)
+    .get(`/videos/search/query=${query}`)
     .then(result => result)
     .catch(error => error);
 };
