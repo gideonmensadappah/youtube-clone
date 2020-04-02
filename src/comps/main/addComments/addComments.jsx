@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { addCommentFunc, allComments } from "../../../data/UserFunctions";
+import CommentListComponent from "../comments/comments";
+
 export const AddComments = props => {
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState({});
   const activeId = props.id;
 
-  //handle change
   function handleChange(e) {
     e.preventDefault();
     const inputComment = document.getElementById("inputComment").value;
@@ -16,16 +17,23 @@ export const AddComments = props => {
     });
   }
 
-  // handle submitted form
+  // On  SubmitForm
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (false) {
-      console.log("cant send, the comment is not valid");
+    const isEmpty = obj => {
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
+      }
+      return true;
+    };
+
+    if (isEmpty(comment)) {
+      alert("The comment is not valid!");
     } else {
       addCommentFunc(comment)
         .then(res => {
-          alert("added new comment...");
+          alert("added new comment!");
           getComments();
         })
         .catch(err => console.log(err));
@@ -33,7 +41,6 @@ export const AddComments = props => {
   }
 
   function getComments() {
-    console.log("in");
     allComments()
       .then(res => setCommentList(res.data))
       .catch(err => console.log(err));
@@ -42,22 +49,6 @@ export const AddComments = props => {
   useEffect(() => {
     getComments();
   }, []);
-
-  const renderCommentsList = () => {
-    console.log(commentList);
-    const filteredVideo = commentList.filter(
-      comments => comments.video_id === activeId
-    );
-    if (filteredVideo.length != 0) {
-      return filteredVideo.map(comment => (
-        <div className="card mt-3" key={comment.id}>
-          <div className="card-body">{comment.comment}</div>
-        </div>
-      ));
-    } else {
-      return <span>No comment for this video..</span>;
-    }
-  };
 
   return (
     <>
@@ -86,7 +77,7 @@ export const AddComments = props => {
           </div>
         </form>
       </div>
-      {renderCommentsList()}
+      <CommentListComponent activeId={activeId} _arrComment={commentList} />
     </>
   );
 };
