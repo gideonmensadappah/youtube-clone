@@ -20,7 +20,7 @@ export const AddComments = props => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    /**
+    /** Name: isEmpty()
      * function checks if an object is empty
      * @param {obj} obj
      * return boolean
