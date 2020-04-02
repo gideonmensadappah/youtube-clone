@@ -7,6 +7,24 @@ import { AddComments } from "./addComments/addComments";
 import { allVideos } from "../../data/UserFunctions";
 import main from "../main/main.css";
 const Main = () => {
+  const styles = {
+    img: {
+      width: "200px",
+      marginTop: "10px",
+      cursor: "pointer"
+    },
+    activeVid: {
+      height: "415px",
+      width: "700px"
+    },
+    div1: {
+      width: "700px",
+      height: "100px",
+      marginLeft: "60px",
+      color: "black"
+    }
+  };
+
   const [activeVideo, setActiveVideo] = useState({
     id: 0,
     key: 0,
@@ -28,7 +46,8 @@ const Main = () => {
       <img
         src={`https://img.youtube.com/vi/${videoSource}/hqdefault.jpg`}
         key={videoId}
-        style={{ width: 200, marginTop: "10px", cursor: "pointer" }}
+        style={styles.img}
+        alt=""
         onClick={() => handleClickedVideo(videoSource, videoTile, videoId)}
       />
     );
@@ -56,9 +75,9 @@ const Main = () => {
       <div className="box-border ">
         <iframe
           className="video"
-          width="700"
+          style={styles.activeVid}
           key={activeVideo.key}
-          height="415"
+          title={activeVideo.source}
           src={embedUrl}
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -72,16 +91,7 @@ const Main = () => {
     <React.Fragment>
       <div className="activeVideo">{activeVid()}</div>
 
-      <div
-        className="div1"
-        style={{
-          width: "700px",
-          height: "100px",
-          marginLeft: "60px",
-          // background: "black",
-          color: "black"
-        }}
-      >
+      <div className="div1" style={styles.div1}>
         <VideoMetaData
           title={activeVideo.title}
           className="metadata mt-3 ml-0"
