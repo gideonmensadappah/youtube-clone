@@ -11,8 +11,14 @@ class SearchBar extends Component {
       searchQuery: "",
       result: {},
       loading: false,
-      message: ""
+      message: "",
+      styles: {
+        searchInput: {
+          width: "350px"
+        }
+      }
     };
+
     this.cancel = "";
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,7 +56,7 @@ class SearchBar extends Component {
             onChange={this.handleChangeInputEvent}
             placeholder="Search..."
             aria-label="Search"
-            style={{ width: "350px" }}
+            style={this.state.styles.searchInput}
           />
         </label>
         <button
