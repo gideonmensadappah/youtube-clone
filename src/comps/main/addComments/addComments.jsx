@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { addCommentFunc, allComments } from "../../../data/UserFunctions";
 import CommentListComponent from "../comments/comments";
 
@@ -17,9 +17,14 @@ export const AddComments = props => {
     });
   }
 
-  // On  SubmitForm
   function handleSubmit(e) {
     e.preventDefault();
+
+    /**
+     * function checks if an object is empty
+     * @param {obj} obj
+     * return boolean
+     */
 
     const isEmpty = obj => {
       for (let key in obj) {
@@ -34,22 +39,24 @@ export const AddComments = props => {
       addCommentFunc(comment)
         .then(res => {
           alert("added new comment!");
-          getComments();
+          loadComments();
         })
         .catch(err => console.log(err));
     }
   }
 
-  function getComments() {
+  function loadComments() {
     allComments()
       .then(res => setCommentList(res.data))
       .catch(err => console.log(err));
   }
 
   useEffect(() => {
-    getComments();
+    loadComments();
   }, []);
-
+  const style = {
+    btn: { marginLeft: "4px" }
+  };
   return (
     <>
       <div className="col box">
@@ -69,10 +76,10 @@ export const AddComments = props => {
             </div>
             <button
               type="submit"
-              style={{ marginLeft: "4px" }}
+              style={style.btn}
               className="btn btn-primary  mb-2"
             >
-              add
+              Add
             </button>
           </div>
         </form>
