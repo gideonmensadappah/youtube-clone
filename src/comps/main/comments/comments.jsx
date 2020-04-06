@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { allComments } from "../../../data/UserFunctions";
 class CommentListComponent extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +31,6 @@ class CommentListComponent extends Component {
   };
 
   componentDidMount() {
-    this._isMounted = true;
     allComments()
       .then((res) => this.setState({ commentList: res.data }))
       .catch((err) => err);
