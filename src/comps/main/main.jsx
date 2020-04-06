@@ -6,38 +6,38 @@ import SearchBar from "../header/searchBar";
 import { AddComments } from "./addComments/addComments";
 import { allVideos } from "../../data/UserFunctions";
 import main from "../main/main.css";
-const Main = () => {
-  const styles = {
-    img: {
-      width: "200px",
-      marginTop: "10px",
-      cursor: "pointer"
-    },
-    activeVid: {
-      height: "415px",
-      width: "700px"
-    },
-    div1: {
-      width: "700px",
-      height: "100px",
-      marginLeft: "60px",
-      color: "black"
-    }
-  };
 
+const styles = {
+  videoThumbnail: {
+    width: "200px",
+    marginTop: "10px",
+    cursor: "pointer",
+  },
+  activeVid: {
+    height: "415px",
+    width: "700px",
+  },
+  div1: {
+    width: "700px",
+    height: "100px",
+    marginLeft: "60px",
+    color: "black",
+  },
+};
+const Main = () => {
   const [activeVideo, setActiveVideo] = useState({
     id: 0,
     key: 0,
     source: "36LHsjX6vCo",
-    title: "defult"
+    title: "defult",
   });
   const [videoList, setVideoList] = useState([]);
 
   //Get all videos and set the state
   function getAllVideos() {
     allVideos()
-      .then(videos => setVideoList(videos.data.videos))
-      .catch(err => console.log(err));
+      .then((videos) => setVideoList(videos.data.videos))
+      .catch((err) => console.log(err));
   }
 
   // Youtube Image Generator
@@ -46,7 +46,7 @@ const Main = () => {
       <img
         src={`https://img.youtube.com/vi/${videoSource}/hqdefault.jpg`}
         key={videoId}
-        style={styles.img}
+        style={styles.videoThumbnail}
         alt=""
         onClick={() => handleClickedVideo(videoSource, videoTile, videoId)}
       />
@@ -59,7 +59,7 @@ const Main = () => {
       id: id,
       key: id,
       source: source,
-      title: title
+      title: title,
     });
   }
 
@@ -108,7 +108,7 @@ const Main = () => {
 
         {/* <NextVideo /> */}
         <div className="boxs">
-          {videoList.map(video => img(video.source, video.title, video.id))}
+          {videoList.map((video) => img(video.source, video.title, video.id))}
         </div>
       </div>
     </React.Fragment>
