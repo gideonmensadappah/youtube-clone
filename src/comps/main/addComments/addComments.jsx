@@ -59,7 +59,7 @@ export const AddComments = (props) => {
   }, [commentList]);
 
   const style = {
-    btn: { marginLeft: "4px" },
+    submitButton: { marginLeft: "4px" },
   };
   return (
     <>
@@ -80,7 +80,7 @@ export const AddComments = (props) => {
             </div>
             <button
               type="submit"
-              style={style.btn}
+              style={style.submitButton}
               className="btn btn-primary  mb-2"
             >
               Add
