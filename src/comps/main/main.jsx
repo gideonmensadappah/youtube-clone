@@ -17,7 +17,7 @@ const styles = {
     height: "415px",
     width: "700px",
   },
-  div1: {
+  videoInfo: {
     width: "700px",
     height: "100px",
     marginLeft: "60px",
@@ -33,14 +33,7 @@ const Main = () => {
   });
   const [videoList, setVideoList] = useState([]);
 
-  //Get all videos and set the state
-  function getAllVideos() {
-    allVideos()
-      .then((videos) => setVideoList(videos.data.videos))
-      .catch((err) => console.log(err));
-  }
-
-  // Youtube Image Generator
+  // Youtube Image Generator, Has to be potten in component
   const img = (videoSource, videoTile, videoId) => {
     return (
       <img
@@ -65,7 +58,9 @@ const Main = () => {
 
   // Use Effect
   useEffect(() => {
-    getAllVideos();
+    allVideos()
+      .then((videos) => setVideoList(videos.data.videos))
+      .catch((err) => console.log(err));
   }, []);
 
   // active video function
@@ -91,7 +86,7 @@ const Main = () => {
     <React.Fragment>
       <div className="activeVideo">{activeVid()}</div>
 
-      <div className="div1" style={styles.div1}>
+      <div className="videoInfo" style={styles.videoInfo}>
         <VideoMetaData
           title={activeVideo.title}
           className="metadata mt-3 ml-0"
