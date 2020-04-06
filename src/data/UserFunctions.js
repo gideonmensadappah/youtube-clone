@@ -112,7 +112,10 @@ export const addCommentFunc = (comment) => {
 };
 //Fetch  all comments
 export const allComments = () => {
-  return axios.get(`/comments/getComments`).then((result) => result);
+  return axios
+    .get(`/comments/getComments`)
+    .then((result) => result)
+    .catch((error) => error);
 };
 
 export const getDataForUserSearch = (query) => {
