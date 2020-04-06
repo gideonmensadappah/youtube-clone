@@ -2,10 +2,23 @@ import React, { useState, useEffect, useCallback } from "react";
 import { addCommentFunc, allComments } from "../../../data/UserFunctions";
 import CommentListComponent from "../comments/comments";
 
-export const AddComments = props => {
+export const AddComments = (props) => {
   const [commentList, setCommentList] = useState([]);
   const [comment, setComment] = useState({});
   const activeId = props.id;
+
+  /** Name: isEmpty()
+   * function checks if an object is empty
+   * @param {obj} obj
+   * return boolean
+   */
+
+  const isEmpty = (obj) => {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) return false;
+    }
+    return true;
+  };
 
   function handleChange(e) {
     e.preventDefault();
@@ -13,49 +26,40 @@ export const AddComments = props => {
 
     setComment({
       comment: inputComment,
-      video_id: props.id
+      video_id: props.id,
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    /** Name: isEmpty()
-     * function checks if an object is empty
-     * @param {obj} obj
-     * return boolean
-     */
-
-    const isEmpty = obj => {
-      for (let key in obj) {
-        if (obj.hasOwnProperty(key)) return false;
-      }
-      return true;
-    };
-
     if (isEmpty(comment)) {
       alert("The comment is not valid!");
     } else {
       addCommentFunc(comment)
-        .then(res => {
+        .then((res) => {
           alert("added new comment!");
-          loadComments();
+          const inputComment = document.getElementById("inputComment");
+          inputComment.value = "";
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err));
     }
   }
-
   function loadComments() {
     allComments()
-      .then(res => setCommentList(res.data))
-      .catch(err => console.log(err));
+      .then((res) => setCommentList(res.data))
+      .catch((err) => console.log(err));
   }
+  useCallback(() => {
+    loadComments();
+  }, [commentList]);
 
   useEffect(() => {
     loadComments();
-  }, []);
+  }, [commentList]);
+
   const style = {
-    btn: { marginLeft: "4px" }
+    btn: { marginLeft: "4px" },
   };
   return (
     <>
