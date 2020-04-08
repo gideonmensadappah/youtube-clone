@@ -17,7 +17,7 @@ import SearchPage from "./pages/search/searchPage";
 function App() {
   const style = {
     padding: "60px",
-    marginTop: "50px"
+    marginTop: "50px",
   };
   return (
     <Router>
@@ -25,9 +25,6 @@ function App() {
         <Route path="/" component={SearchBar} />
         <Header />
         <Switch>
-          {/* <div className="container" style={style}>
-          <div className="row">
-            <div className="col"> */}
           <Route path="/user/profile" component={profile} />
           <Route path="/user/update/:id" component={updateProfile} />
           <Route path="/" exact component={Main} />
@@ -39,9 +36,6 @@ function App() {
           <Route pah="/search/:query?q=val/:" component={SearchPage} />
           <Route path="*" component={PageNotFound} />
         </Switch>
-        {/* </div>
-          </div>
-        </div> */}
       </React.Fragment>
     </Router>
   );
