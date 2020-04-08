@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { addCommentFunc } from "../../../data/UserFunctions";
-import CommentList from "../comments/comments";
 
 /** Name: isEmpty()
  * function checks if an object is empty
@@ -34,11 +33,9 @@ export const AddComments = (props) => {
         };
         addCommentFunc(comment)
           .then((res) => {
-            console.log(commentList);
-
             const inputComment = document.getElementById("inputComment");
             inputComment.value = "";
-            setCommentList([...commentList, res.data]);
+            props.setComments(res.data);
           })
           .catch((err) => console.log(err));
       } else {
@@ -50,6 +47,7 @@ export const AddComments = (props) => {
 
   return (
     <>
+      {" "}
       <div className="col box">
         <form className="form-inline" onSubmit={handleSubmit}>
           <div className="form-group mb-2">
@@ -74,7 +72,6 @@ export const AddComments = (props) => {
           </div>
         </form>
       </div>
-      <CommentList activeId={activeId} _arrComment={commentList} />
     </>
   );
 };
