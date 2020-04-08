@@ -111,9 +111,10 @@ export const addCommentFunc = (comment) => {
     .catch((err) => err);
 };
 //Fetch  all comments
-export const allComments = () => {
+export const fetchAllComments = (activeVideoId) => {
+  console.log(activeVideoId);
   return axios
-    .get(`/comments/getComments`)
+    .get(`/comments/getComments/${activeVideoId}`)
     .then((result) => result)
     .catch((error) => error);
 };
