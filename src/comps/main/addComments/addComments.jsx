@@ -1,66 +1,53 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { addCommentFunc, allComments } from "../../../data/UserFunctions";
-import CommentListComponent from "../comments/comments";
+import { addCommentFunc } from "../../../data/UserFunctions";
+import CommentList from "../comments/comments";
+
+/** Name: isEmpty()
+ * function checks if an object is empty
+ * @param {obj} obj
+ * return boolean
+ */
+
+const isEmpty = (obj) => {
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) return false;
+  }
+  return true;
+};
+
+const style = {
+  submitButton: { marginLeft: "4px" },
+};
 
 export const AddComments = (props) => {
   const [commentList, setCommentList] = useState([]);
-  const [comment, setComment] = useState({});
   const activeId = props.id;
 
-  /** Name: isEmpty()
-   * function checks if an object is empty
-   * @param {obj} obj
-   * return boolean
-   */
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      const commentText = document.getElementById("inputComment").value;
+      if (!isEmpty(commentText)) {
+        const comment = {
+          video_id: activeId,
+          comment: commentText,
+        };
+        addCommentFunc(comment)
+          .then((res) => {
+            console.log(commentList);
 
-  const isEmpty = (obj) => {
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) return false;
-    }
-    return true;
-  };
+            const inputComment = document.getElementById("inputComment");
+            inputComment.value = "";
+            setCommentList([...commentList, res.data]);
+          })
+          .catch((err) => console.log(err));
+      } else {
+        alert("not valid comment!");
+      }
+    },
+    [commentList, activeId]
+  );
 
-  function handleChange(e) {
-    e.preventDefault();
-    const inputComment = document.getElementById("inputComment").value;
-
-    setComment({
-      comment: inputComment,
-      video_id: props.id,
-    });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (isEmpty(comment)) {
-      alert("The comment is not valid!");
-    } else {
-      addCommentFunc(comment)
-        .then((res) => {
-          alert("added new comment!");
-          const inputComment = document.getElementById("inputComment");
-          inputComment.value = "";
-        })
-        .catch((err) => console.log(err));
-    }
-  }
-  function loadComments() {
-    allComments()
-      .then((res) => setCommentList(res.data))
-      .catch((err) => console.log(err));
-  }
-  useCallback(() => {
-    loadComments();
-  }, [commentList]);
-
-  useEffect(() => {
-    loadComments();
-  }, [commentList]);
-
-  const style = {
-    submitButton: { marginLeft: "4px" },
-  };
   return (
     <>
       <div className="col box">
@@ -71,7 +58,6 @@ export const AddComments = (props) => {
                 comment
               </label>
               <input
-                onChange={handleChange}
                 type="text"
                 className="form-control"
                 id="inputComment"
@@ -88,7 +74,7 @@ export const AddComments = (props) => {
           </div>
         </form>
       </div>
-      <CommentListComponent activeId={activeId} _arrComment={commentList} />
+      <CommentList activeId={activeId} _arrComment={commentList} />
     </>
   );
 };
