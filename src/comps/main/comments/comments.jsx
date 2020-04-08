@@ -1,52 +1,51 @@
 import React, { Component } from "react";
-import { allComments } from "../../../data/UserFunctions";
-class CommentListComponent extends Component {
+import Comment from "./comment.jsx";
+import { fetchAllComments } from "../../../data/UserFunctions";
+
+class CommentList extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      activeVideo: this.props.activeId,
-      commentList: [],
+      comments: [],
     };
-
-    this.renderCommentsList = (commentList) => this.commentList();
   }
-
-  // Extract to diffrent component commentCardComponent
-  commentList = () => {
-    return this.state.commentList
-      .filter((comments) => comments.video_id === this.state.activeVideo)
-      .map((res) => (
-        <div className="card" key={res.id}>
-          <div className="card-header">Quote</div>
-          <div className="card-body">
-            <blockquote className="blockquote mb-0">
-              <p>{res.comment}</p>
-              <footer className="blockquote-footer">
-                Someone famous in <cite title="Source Title">Source Title</cite>
-              </footer>
-            </blockquote>
-          </div>
-        </div>
-      ));
-  };
 
   componentDidMount() {
-    allComments()
-      .then((res) => this.setState({ commentList: res.data }))
-      .catch((err) => err);
+    this.getData();
   }
 
+  getData = () => {
+    const { activeId } = this.props;
+
+    fetchAllComments(activeId)
+      .then((res) => {
+        const { data } = res;
+        console.log(data);
+        const activeVideoComments = data.filter(
+          (comment) => comment.video_id === activeId
+        );
+
+        this.setState({ comments: activeVideoComments });
+      })
+      .catch((err) => err);
+  };
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      this.setState({
-        activeVideo: this.props.activeId,
-        commentList: this.props._arrComment,
-      });
+    if (this.props.activeId !== prevProps.activeId) {
+      this.getData();
     }
   }
 
   render() {
-    return this.renderCommentsList(this.state.commentList);
+    const { comments } = this.state;
+
+    return (
+      <>
+        {comments.map((comment) => (
+          <Comment comment={comment} key={comment.id} />
+        ))}
+      </>
+    );
   }
 }
-export default CommentListComponent;
+export default CommentList;
