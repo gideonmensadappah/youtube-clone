@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import Comment from "./comment.jsx";
+import { AddComments } from "../addComments/addComments";
 import { fetchAllComments } from "../../../data/UserFunctions";
 
-class CommentList extends Component {
+class Comments extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       comments: [],
+      setComments: (comments) => {
+        this.setState({ comments: [...this.state.comments, comments] });
+      },
     };
   }
 
@@ -16,31 +20,28 @@ class CommentList extends Component {
   }
 
   getData = () => {
-    const { activeId } = this.props;
+    const { activeVideoId } = this.props;
 
-    fetchAllComments(activeId)
+    fetchAllComments(activeVideoId)
       .then((res) => {
         const { data } = res;
-        console.log(data);
-        const activeVideoComments = data.filter(
-          (comment) => comment.video_id === activeId
-        );
 
-        this.setState({ comments: activeVideoComments });
+        this.setState({ comments: data });
       })
       .catch((err) => err);
   };
   componentDidUpdate(prevProps) {
-    if (this.props.activeId !== prevProps.activeId) {
+    if (this.props.activeVideoId !== prevProps.activeVideoId) {
       this.getData();
     }
   }
 
   render() {
     const { comments } = this.state;
-
+    const { activeVideoId } = this.props;
     return (
       <>
+        <AddComments id={activeVideoId} setComments={this.state.setComments} />
         {comments.map((comment) => (
           <Comment comment={comment} key={comment.id} />
         ))}
@@ -48,4 +49,4 @@ class CommentList extends Component {
     );
   }
 }
-export default CommentList;
+export default Comments;
