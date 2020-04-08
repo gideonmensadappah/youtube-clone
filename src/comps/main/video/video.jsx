@@ -1,30 +1,31 @@
-import React, { Component } from 'react';
-import videoBox from '../video/videobox.scss';
-import {VideoPreview} from '../../main/videoPreview/videoPreview';
+import React, { Component } from "react";
+import videoBox from "../video/videobox.scss";
+const styles = {
+  activeVideo: {
+    height: "415px",
+    width: "700px",
+  },
+  boxBorder: {
+    marginTop: "5em",
+  },
+};
+export const Video = (props) => {
+  const video = props.activeVideo;
+  const embedUrl = `https://www.youtube.com/embed/${video.source}?autoplay=1`;
 
-
- export function Video(props) {
-    if (!props.id) {
-        return null;
-      }
-      const BASE_EMBED_URL = "https://www.youtube.com/embed/";
-      const embedUrl = `${BASE_EMBED_URL}${props.id}`;
-
-        return ( 
-            <React.Fragment>
-                        <div className="box">
-               <iframe width="560" 
-               height="315" 
-               src={embedUrl}
-               frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowFullScreen></iframe>
-       
-                      </div>
-              
-                  
-            </React.Fragment>
-        
-            );
-    }
-
- 
+  return (
+    <>
+      <div className="box-border" style={styles.boxBorder}>
+        <iframe
+          title={video.id}
+          src={embedUrl}
+          frameBorder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          alt=""
+          style={styles.activeVideo}
+        ></iframe>
+      </div>
+    </>
+  );
+};
