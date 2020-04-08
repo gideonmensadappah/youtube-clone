@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Comments from "./comments/comments";
 import { VideoMetaData } from "../main/VideoMetaData/VideoMetaData";
 import SearchBar from "../header/searchBar";
-
+import { Video } from "../main/video/video";
 import VideoThumbnail from "../main/MoviesMenue/VideoThumbnail";
 
 import main from "../main/main.css";
@@ -12,10 +12,6 @@ const styles = {
     width: "200px",
     marginTop: "10px",
     cursor: "pointer",
-  },
-  activeVid: {
-    height: "415px",
-    width: "700px",
   },
   videoInfo: {
     width: "700px",
@@ -32,28 +28,11 @@ const Main = () => {
     title: "defult",
   });
 
-  // active video function
-  function activeVid() {
-    const embedUrl = `https://www.youtube.com/embed/${activeVideo.source}?autoplay=1`;
-    return (
-      <div className="box-border ">
-        <iframe
-          className="video"
-          style={styles.activeVid}
-          key={activeVideo.key}
-          title={activeVideo.source}
-          src={embedUrl}
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>{" "}
-      </div>
-    );
-  }
-
   return (
     <React.Fragment>
-      <div className="activeVideo">{activeVid()}</div>
+      <div className="activeVideo">
+        <Video activeVideo={activeVideo} />
+      </div>
 
       <div className="videoInfo" style={styles.videoInfo}>
         <VideoMetaData
