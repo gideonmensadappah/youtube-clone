@@ -1,37 +1,52 @@
-import React, { useState, useEffect } from "react";
-import comments from "./comment.css";
-import data from "../../../data/data.json";
-import { allComments } from "../../../data/UserFunctions";
-export const Comments = props => {
-  const [commentList, setCommentList] = useState([]);
+import React, { Component } from "react";
+import Comment from "./comment.jsx";
+import { AddComments } from "../addComments/addComments";
+import { fetchAllComments } from "../../../data/UserFunctions";
 
-  const activeId = props.activeVideoId;
+class Comments extends Component {
+  constructor(props) {
+    super(props);
 
-  function getComments() {
-    console.log("in");
-    allComments()
-      .then(res => setCommentList(res.data))
-      .catch(err => console.log(err));
+    this.state = {
+      comments: [],
+      setComments: (comments) => {
+        this.setState({ comments: [...this.state.comments, comments] });
+      },
+    };
   }
 
-  useEffect(() => {
-    getComments();
-  }, []);
-  const filter = commentList.filter(num => num.video_id == activeId);
-  // console.log(filter);
-  return (
-    <React.Fragment>
-      {filter.map((_data, index) => {
-        return (
-          <div className="card w-50 mt-3" key={_data.id}>
-            <div className="card-body">
-              <p className="card-text">{_data.comment}</p>
-            </div>
-          </div>
-        );
-      })}
-    </React.Fragment>
-  );
-};
+  componentDidMount() {
+    this.getData();
+  }
 
+  getData = () => {
+    const { activeVideoId } = this.props;
+
+    fetchAllComments(activeVideoId)
+      .then((res) => {
+        const { data } = res;
+
+        this.setState({ comments: data });
+      })
+      .catch((err) => err);
+  };
+  componentDidUpdate(prevProps) {
+    if (this.props.activeVideoId !== prevProps.activeVideoId) {
+      this.getData();
+    }
+  }
+
+  render() {
+    const { comments } = this.state;
+    const { activeVideoId } = this.props;
+    return (
+      <>
+        <AddComments id={activeVideoId} setComments={this.state.setComments} />
+        {comments.map((comment) => (
+          <Comment comment={comment} key={comment.id} />
+        ))}
+      </>
+    );
+  }
+}
 export default Comments;

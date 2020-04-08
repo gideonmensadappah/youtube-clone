@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import queryString from "query-string";
-import { getDataforUserSearch } from "../../data/UserFunctions";
+import { getDataForUserSearch } from "../../data/UserFunctions";
 import searchPage from "./searchPage.css";
 export default class SearchPage extends Component {
   constructor(props) {
@@ -15,18 +15,19 @@ export default class SearchPage extends Component {
   componentDidMount() {
     //query string
 
-    const url = this.props.location.search;
-    console.log(url);
+    const url = this.props.location.pathname;
+
     const userRequest = url.split("=");
 
     this.setState({
       query: userRequest[1]
     });
 
-    getDataforUserSearch(url)
+    getDataForUserSearch(userRequest[1])
       .then(result => {
+        console.log(result);
         this.setState({
-          resulfafasfffat: result.data,
+          result: result.data,
           res: result.data
         });
       })
@@ -36,7 +37,7 @@ export default class SearchPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Result for: {this.state.query}</h1>
+        <h1 style={{ marginTop: "10px" }}>Result for: {this.state.query}</h1>
         {!this.state.result.length == 0 ? (
           this.state.result.map(data => (
             <div key={data.id} className="container display-serch">
